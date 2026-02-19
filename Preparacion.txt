@@ -1,0 +1,66 @@
+Producto Minimo Viable: Juego Simon Dice. Implementado con 4 leds, 4 botones, un display.
+
+Se inicia con el display dando la bienvenida al juego diciendo "modos de juego" indicando "facil o dificil",
+para luego dar inicio a la partida. 
+
+"Modo Facil"
+El juego encenderá un led aleatorio por 1 s para luego apagarse para que el usuario presione uno de los 
+botones. Si el usuario presiona el boton correspondiente al color del led que se prendió gana un punto, en
+caso contrario, pierde la partida. 
+Al avanzar la partida, el sistema irá agregando un color más al patrón que se va conformando de manera
+azarosa. El usuario debe ingresar la secuencia de colores indicada por el sistema en el orden en la cual
+se le fue presentada. En este modo se mostrará la secuencia generada, se repasará la secuencia terminando
+con el nuevo color.
+
+"Modo Dificil"
+El juego encenderá un led aleatorio por 0.75 s para luego apagarse para que el usuario presione uno de los 
+botones. Si el usuario presiona el boton correspondiente al color del led que se prendió gana un punto, en
+caso contrario, pierde la partida. 
+Al avanzar la partida, el sistema irá agregando un color más al patrón que se va conformando de manera
+azarosa. El usuario debe ingresar la secuencia de colores indicada por el sistema en el orden en la cual
+se le fue presentada. En este modo no se mostrará la secuencia generada, solo se presentará el nuevo color.
+
+Durante la partida el display irá mostrando el puntaje. En ambos modos la partida termina cuando el usuario ingresa el color equivocado. Al ocurrir esto, se mostrará en el display 
+"Game Over" encendiendo todos los leds. El display mostrará los 3 mayores puntajes históricos del juego. 
+
+Elementos:
+Elementos obligatorios de hardware que contiene la propuesta:
+- Buttons, Leds, Buzzer, módulo HM-10 (para usar App vía Bluetooth).
+- Memoria no volatil: E2PROM externa o Flash interna (almacenamiento del SET_UP).
+- Sensores analógicos (LDR).
+- 4 resistencias 200 Ohms
+- 4 botones 
+- Placa experimental agujereada
+- Display con potenciometro
+- Estaño
+- Soldador
+- Cables
+- Multimetro 
+- Fuente de alimentación
+
+Elementos de programación que deben incluirse al implementar la propuesta::
+- Bare Metal (sin Sistema Operativo), del tipo Event-Triggered System
+- Estructurada/Modular (Escrutar/Procesar/Actuar)
+- Patrones de software
+Ejecutor cíclico, Super-Loop (polling & interrupts) => 1 vuelta < 1mS
+Tick = 1mS (Systick => Callback)
+Tareas de código no bloqueante, ya sea temporizada o no temporizada
+Modelos - Diagramas de Estado - c/Interfaces (colas, estructuras, array de estructuras)
+Menú Interactivo
+Bajo Consumo
+Al menos dos modos de operación (NORMAL, SET_UP, FALLA, ...)
+Periféricos con comunicación SPI y/o I2C
+Periféricos gestionados por Polling, Interrupts o DMA (=> Callbacks), por ejemplo
+acelerómetro, gps, humedad, temperatura, presión, ...
+
+Pautas de trabajo que debe cumplirse al implementar la propuesta:
+- Documentar esquema eléctrico, vistas del cableado (similar a vistas del libro)
+- Para la conexión de placas/módulos: No usar protoboard ni cables Dupont
+- Para la conexión de placas/módulos: Usar placa experimental con componentes y
+conectores soldados e interconexión de componentes/conectores cableada (alambres
+telefónico o wire wrap soldado)
+- Descripción del comportamiento
+- Medición y análisis de consumo
+- Medición y análisis de tiempos de ejecución de cada tarea (WCET)
+- Cálculo del Factor de Uso (U) de la CPU
+
