@@ -35,7 +35,7 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
         - [2.3.4 Display LCD](#234-display-lcd)
         - [2.3.5 Memoria E2PROM externa](#235-memoria-e2prom-externa)
         - [2.3.6 Placa de desarrollo](#236-placa-de-desarrollo)
-3. [Diseño e implementación](#diseño-de-implementación)
+3. [Diseño e implementación](#diseño-e-implementación)
     - [3.1 Esquema eléctrico y conexión de placas](#31-esquema-eléctrico-y-conexión-de-placas)
     - [3.2 Descripción del esquema eléctrico](#32-descripción-del-esquema-eléctrico)
     - [3.3 Descripción del comportamiento](#33-descripción-del-comportamiento)
