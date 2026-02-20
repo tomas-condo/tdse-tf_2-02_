@@ -254,7 +254,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-# 3. Diseño e implementación 
+# Diseño e implementación 
 ## 3.1 Esquema eléctrico y conexión de placas
 
 Para la integración física del sistema se soldó a una placa experimental de (15 x 20) cm para garantizar la robustez mecánica y eléctrica del prototipo. El circuito se centra en la placa de desarrollo STM32, la cual gestiona los periféricos mediante las siguientes interfaces:
@@ -366,7 +366,7 @@ Actúa como MEF intermedia entre display.c (librería de bajo nivel de abstracci
 Módulo encargado de la navegación del sistema cuando no se está en una partida activa. Gestiona las pantallas de bienvenida, la selección de dificultad y la visualización de los puntajes históricos. Interpreta las pulsaciones de los botones (provenientes de task sensor) como comandos de navegación ("Izquierda", "Derecha", "Enter" y "Back") en lugar de colores de juego.
 
 
-# 4. Ensayos y resultados
+# Ensayos y resultados
 ## 4.1 Medición y análisis de consumo
 
 Para evaluar la eficiencia energética del sistema, se realizaron mediciones de corriente en dos escenarios operativos: **Modo Activo** (*Run Mode*) y **Modo Bajo Consumo** (*Sleep Mode*).
@@ -663,7 +663,7 @@ Se observa que el firmware actual ocupa el 26,81% de la capacidad de almacenamie
 
 Se dejará adjunto un link funcional al video: https://youtu.be/UB5wlkK1kCw
 
-# 5.Conclusiones
+# Conclusiones
 
 ## 5.1 Resultados obtenidos
 
@@ -675,7 +675,7 @@ Tomamos como aprendizaje los funcionamientos de los sistemas embebidos y cómo e
 
 Para continuar este proyecto, podríamos rediseñar la interfaz del usuario para que, con un mayor presupuesto, podamos agregar una carcasa exterior y botones más grandes que sean más satisfactorios para presionar y así brindar una mejor experiencia al usuario. También consideramos agregar el sonido que no pudimos incluir por restricciones de tiempo.
 
-# 6.Bibliografía
+# Bibliografía
 [1]https://www.alldatasheet.com/datasheet-pdf/view/75272/MICRO-ELECTRONICS/MBB51D.html 
 
 [2]https://www.alldatasheet.com/datasheet-pdf/view/574755/ATMEL/AT24C256.html 
