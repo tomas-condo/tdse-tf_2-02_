@@ -20,8 +20,8 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
   
 # Índice 
 1. [Introducción general](#introducción-general)
-     - [1.1 Objetivos](#11-objetivos)
-     - [1.2 Análisis de mercado](#12-análisis-de-mercado)
+    - [1.1 Objetivos](#11-objetivos)
+    - [1.2 Análisis de mercado](#12-análisis-de-mercado)
 2. [Introducción específica](#introducción-específica)
     - [2.1 Requisitos del proyecto](#21-requisitos-del-proyecto)
     - [2.2 Casos de uso](#22-casos-de-uso)
@@ -30,13 +30,13 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
         - [2.2.3 Caso de uso 3: El usuario consulta los puntajes máximos](#223-caso-de-uso-3-el-usuario-consulta-los-puntajes-máximos)
     - [2.3 Elementos de hardware](#23-elementos-de-hardware)
         - [2.3.1 Buttons](#231-buttons)
-        - [2.3.2 Leds (Diodos Emisores de Luz)](#232-leds-(diodos-emisores-de-luz))
+        - [2.3.2 Leds (Diodos Emisores de Luz)](#232-leds-diodos-emisores-de-luz)
         - [2.3.3 LDR sensor analógico](#233-ldr-sensor-analógico)
         - [2.3.4 Display LCD](#234-display-lcd)
         - [2.3.5 Memoria E2PROM externa](#235-memoria-e2prom-externa)
         - [2.3.6 Placa de desarrollo](#236-placa-de-desarrollo)
 3. [Diseño de implementación](#diseño-de-implementación)
-    - [3.1 Esquema eléctrico y conexión de placas](#31-esquema-eléctrico-y-conexion-de-placas)
+    - [3.1 Esquema eléctrico y conexión de placas](#31-esquema-eléctrico-y-conexión-de-placas)
     - [3.2 Descripción del esquema eléctrico](#32-descripción-del-esquema-eléctrico)
     - [3.3 Descripción del comportamiento](#33-descripción-del-comportamiento)
     - [3.4 Firmware del Simon Says](#34-firmware-del-simon-says)
@@ -51,7 +51,7 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
         - [3.4.9 Task menu](#349-task-menu)
 4. [Ensayos y resultados](#ensayos-y-resultados)
     - [4.1 Medición y análisis de consumo](#41-medición-y-análisis-de-consumo)
-    - [4.2 Medición y análisis de tiempos de ejecución (WCET)](#42-medición-y-análisis-de-tiempos-de-ejecución-(WCET))
+    - [4.2 Medición y análisis de tiempos de ejecución (WCET)](#42-medición-y-análisis-de-tiempos-de-ejecución-wcet)
     - [4.3 Cálculo del factor de uso (U) de la CPU](#43-cálculo-del-factor-de-uso-u-de-la-cpu)
     - [4.4 Cumplimiento de requisitos](#44-cumplimiento-de-requisitos)
     - [4.5 Reporte de uso](#45-reporte-de-uso)
@@ -239,7 +239,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-### 2.3.6 Placa de desarrollo (Microcontrolador)
+### 2.3.6 Placa de desarrollo
 <table>
   <tr>
     <td width="55%" valign="top">
