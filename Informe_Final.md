@@ -1,5 +1,5 @@
 
-<img width="822" height="275" alt="387361653-15600b18-f73b-4ba3-a959-47f0048a1ab6" src="https://github.com/user-attachments/assets/783185ee-f430-4c1f-96fa-2ac4ad3de8b4" />
+<img width="762" height="292" alt="image" src="https://github.com/user-attachments/assets/f4169b6a-832d-42a4-a46d-fa6cc8cc8f36" />
 
 # **Juego Interactivo "Simón dice"  INFORME FINAL** 
 
@@ -14,13 +14,13 @@
 ### *Resumen*
 En este trabajo se realiza el diseño e implementación del juego "Simon Dice" basado en la arquitectura ARM Cortex-M3. Este sistema tiene por objetivo proporcionar una plataforma de entretenimiento y entrenamiento cognitivo, permitiendo al usuario ejercitar su memoria a corto plazo mediante la reproducción de secuencias aleatorias de luces. El sistema cuenta con características avanzadas como regulación automática de brillo ambiental mediante sensores LDR, almacenamiento no volátil de puntajes máximos en memoria EEPROM y una interfaz de usuario rica visualizada en un display LCD de 20x4 caracteres.
 
-La implementación del mismo se realizó bajo el paradigma Bare Metal (sin sistema operativo), utilizando lenguaje C y manipulando directamente los registros del microcontrolador STM32 Nucleo-F103RB. El diseño de software se estructura estrictamente mediante Máquinas de Estados Finitos (FSM) jerárquicas y modularizadas, garantizando un código robusto, escalable y mantenible.
+La implementación del mismo se realizó bajo el paradigma Bare Metal (sin sistema operativo), utilizando lenguaje C y manipulando directamente los registros de la placa STM32 Nucleo-F103RB. El diseño de software se estructura estrictamente mediante Máquinas de Estados Finitos (FSM) jerárquicas y modularizadas, garantizando un código robusto, escalable y mantenible.
 
 En esta memoria se presenta la motivación del proyecto, el diseño del hardware y firmware, y los resultados de los ensayos funcionales.
   
 # Índice 
 1. [Introducción general](#introducción-general)
-     - [1.1 Análisis de objetivos](#11-análisis-de-objetivos)
+     - [1.1 Objetivos](#11-objetivos)
      - [1.2 Análisis de mercado](#12-análisis-de-mercado)
 2. [Introducción específica](#introducción-específica)
     - [2.1 Requisitos del proyecto](#21-requisitos-del-proyecto)
@@ -28,48 +28,51 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
         - [2.2.1 Caso de uso 1: El usuario juega una partida en modo clásico](#221-caso-de-uso-1-el-usuario-juega-una-partida-en-modo-clásico)
         - [2.2.2 Caso de uso 2: El usuario cambia la dificultad del juego](#222-caso-de-uso-2-el-usuario-cambia-la-dificultad-del-juego)
         - [2.2.3 Caso de uso 3: El usuario consulta los puntajes máximos](#223-caso-de-uso-3-el-usuario-consulta-los-puntajes-máximos)
-    - [2.2 Elementos obligatorios de hardware](#22-elementos-obligatorios-de-hardware)
+    - [2.2 Elementos de hardware](#22-elementos-de-hardware)
         - [2.2.1 Buttons](#221-buttons)
         - [2.2.2 Leds (Diodos Emisores de Luz)](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#222-leds-diodos-emisores-de-luz)
-        - [2.2.3 LDR Sensor Analógico](#223-ldr-sensor-analógico)
+        - [2.2.3 LDR sensor analógico](#223-ldr-sensor-analógico)
         - [2.2.4 Display LCD](#224-display-lcd)
-        - [2.2.5 Memoria E2PROM Externa](#225-memoria-e2prom-externa)
-        - [2.2.6 Placa de Desarrollo](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#226-placa-de-desarrollo-microcontrolador)
+        - [2.2.5 Memoria E2PROM externa](#225-memoria-e2prom-externa)
+        - [2.2.6 Placa de desarrollo](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#226-placa-de-desarrollo-microcontrolador)
 3. [Diseño de implementación](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#3-dise%C3%B1o-e-implementaci%C3%B3n)
-    - [3.1 Documentar esquema eléctrico y conexión de placas](#31-documentar-esquema-eléctrico-y-conexión-de-placas)
-    - [3.2 Descripción del Esquema Eléctrico](#32-descripción-del-esquema-eléctrico)
+    - [3.1 Esquema eléctrico y conexión de placas](#31-esquema-eléctrico-y-conexión-de-placas)
+    - [3.2 Descripción del esquema eléctrico](#32-descripción-del-esquema-eléctrico)
     - [3.3 Descripción del comportamiento](#33-descripción-del-comportamiento)
     - [3.4 Firmware del Simon Says](#34-firmware-del-simon-says)
-        - [3.4.1 Task Actuator](#341-task-actuator)
-        - [3.4.2 Task Sensor](#342-task-sensor)
+        - [3.4.1 Task actuator](#341-task-actuator)
+        - [3.4.2 Task sensor](#342-task-sensor)
         - [3.4.3 Task ADC](#343-task-adc)
         - [3.4.4 Task PWM](#344-task-pwm)
-        - [3.4.5 Task Gameplay](#345-task-gameplay)
-        - [3.4.6 Task Storage](#346-task-storage)
+        - [3.4.5 Task gameplay](#345-task-gameplay)
+        - [3.4.6 Task storage](#346-task-storage)
         - [3.4.7 Task I2C](#347-task-i2c)
-        - [3.4.8 Task Display](#348-task-display)
-        - [3.4.9 Task Menu](#349-task-menu)
+        - [3.4.8 Task display](#348-task-display)
+        - [3.4.9 Task menu](#349-task-menu)
 4. [Ensayos y resultados](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#4-ensayos-y-resultados)
     - [4.1 Medición y análisis de consumo](#41-medición-y-análisis-de-consumo)
     - [4.2 Medición y análisis de tiempos de ejecución (WCET)](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#42-medici%C3%B3n-y-an%C3%A1lisis-de-tiempos-de-ejecuci%C3%B3n-wcet)
-    - [4.3 Cálculo del Factor de Uso (U) de la CPU](#43-cálculo-del-factor-de-uso-u-de-la-cpu)
+    - [4.3 Cálculo del factor de uso (U) de la CPU](#43-cálculo-del-factor-de-uso-u-de-la-cpu)
     - [4.4 Cumplimiento de requisitos](#44-cumplimiento-de-requisitos)
-    - [4.5 Reporte de Uso](#45-Reporte-de-Uso)
-    - [4.6 Prueba de Integración](#46-Prueba-de-Integración)
-5. [Bibliografía](https://github.com/tomas-condo/tdse-tf_2-02/blob/main/aver.md#5bibliograf%C3%ADa)
+    - [4.5 Reporte de uso](#45-reporte-de-uso)
+    - [4.6 Prueba de integración](#46-prueba-de-integración)
+5. [Conclusiones]()
+    - [5.1 Resultados obtenidos](#51-resultados-obtenidos)
+    - [5.2 Próximos pasos](#52-próximos-pasos)
+6. [Bibliografía]()
 
 
 # **Introducción general** 
-## 1.1 Análisis de objetivos
+## 1.1 Objetivos
 
 El objetivo del proyecto es repensar el juego “Simon dice”. Al ser un juego que desafía la memoria visual, la concentración y los reflejos, mejorando la capacidad de atención y la resolución de problemas creemos que puede ser llevado al ámbito de la rehabilitación cognitiva, la prevención del deterioro cognitivo y en desarrollo infantil para estimular la neuroplasticidad ya que, al requerir un enfoque visual constante mejora la atención sostenida, la capacidad de retener información a corto plazo y la memoria episódica y semántica.
 
 ## 1.2 Análisis de mercado
-En el mercado existen diversos productos relacionados con juegos de memoria y reflejos, desde el clásico “Simon” de Hasbro, hasta juguetes electrónicos genéricos y aplicaciones móviles que imitan el mismo concepto. 
+En el mercado existen diversos productos relacionados con juegos de memoria y reflejos, desde el [clásico “Simon” de Hasbro](https://instructions.hasbro.com/es-cl/instruction/simon-game), hasta juguetes electrónicos genéricos y aplicaciones móviles que imitan el mismo concepto. 
 
 El juguete clásico no guarda el historial de las diversas partidas y, al tener una dificultad fija que se acelera demasiado rápido para un paciente en rehabilitación o un niño con dificultades de aprendizaje vimos una oportunidad de mejora y de inclusión. 
 
-Se tomó como referente Lumosity, CogniFit y Peak, aplicaciones de ejercicios mentales en tablet/celular para analizar las diversas opciones que el mercado ofrece. Estás tienen la desventaja de la barrera tecnológica, a los adultos mayores les cuesta usar pantallas táctiles, por lo que, un botón físico grande e iluminado es más intuitivo. Además, al ser utilizadas en pantallas táctiles no trabajan la motricidad fina ni la propiocepción de la misma forma que presionar un botón mecánico real. 
+Se tomó como referente [Lumosity](https://app.lumosity.com/es/landing), [CogniFit](https://www.cognifit.com/ar?srsltid=AfmBOooEsyYxj9pAMaxhdNQi1WLkWoFHKCuE0GOEz-8ze5Ma6s48iJ-7) y [Peak](https://www.peak.net/), aplicaciones de ejercicios mentales en tablet/celular para analizar las diversas opciones que el mercado ofrece. Estás tienen la desventaja de la barrera tecnológica, a los adultos mayores les cuesta usar pantallas táctiles, por lo que, un botón físico grande e iluminado es más intuitivo. Además, al ser utilizadas en pantallas táctiles no trabajan la motricidad fina ni la propiocepción de la misma forma que presionar un botón mecánico real. 
 
 El presente proyecto recupera ese aspecto físico y educativo, brindando un entorno ideal para el desarrollo de estimulación neurocognitiva que, a diferencia de los juguetes comerciales, que carecen de registros de progreso, este desarrollo propone una solución de bajo costo brindando esta posibilidad, sumado a la personalización de modos de juego, visibilidad y diversos parámetros como tiempo de encendido de luz a través de este prototipo basado en STM32. 
 
@@ -119,9 +122,11 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
 |  | 9.2 | El sistema organizará su lógica en una máquina de estados para evitar bloqueos y comportamientos impredecibles. |
 |  | 9.3 | El sistema deberá indicar mediante mensajes en la pantalla y señales sonoras si ocurre un error interno o condición inesperada. |
 
-<p align="center"><em>Tabla 1: Requisitos del proyecto.</em></p>
+<p align="center"><em>Tabla 2.1: Requisitos del proyecto.</em></p>
 
 # 2.2 Casos de uso
+
+A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes casos de uso.
 
 ## 2.2.1 Caso de uso 1: El usuario juega una partida en modo clásico
 
@@ -130,7 +135,7 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
 | Disparador | El jugador quiere iniciar una nueva partida (Normal o Difícil). |
 | Precondiciones | El sistema está encendido. Se ha mostrado la pantalla de bienvenida. El jugador ha seleccionado la opción "Jugar" propuesta por el menú utilizando los botones del juego. Todos los LEDs se encuentran apagados. |
 | Flujo principal | El jugador navega el menú utilizando los botones y selecciona la dificultad. El sistema genera una secuencia pseudoaleatoria inicial de un solo LED y la reproduce con luz (según el modo: secuencia completa o solo el nuevo color). El jugador repite la secuencia utilizando los cuatro pulsadores; por cada pulsación correcta se enciende el LED correspondiente. Si el jugador ingresa correctamente toda la secuencia, el sistema incrementa la longitud en un elemento, actualiza el nivel y el puntaje y muestra el nuevo puntaje en la pantalla LCD. Este ciclo se repite hasta que el jugador comete un error, donde el sistema muestra un mensaje de “Game Over” en el LCD y finaliza la partida mostrando el puntaje final.
-<p align="center"><em>Tabla 2: Caso de uso 1: El usuario juega una partida</em></p>
+<p align="center"><em>Tabla 2.2: Caso de uso 1: El usuario juega una partida</em></p>
 
  ## 2.2.2 Caso de uso 2: El usuario cambia la dificultad del juego
 
@@ -140,7 +145,7 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
 | Precondiciones | El sistema está encendido. No hay una partida en curso. El juego se encuentra en el menú principal o en el menú de configuración. |
 | Flujo principal | El jugador accede a la pantalla de selección de dificultad utilizando los botones del juego. En el LCD se muestran las opciones “Normal” y “Difícil”, avanzando con el selector en dificil pulsando "Enter". El sistema almacena la nueva dificultad seleccionada en el struct de gameplay, actualiza los parámetros internos (forma de reproducir la secuencia, tiempos, etc.) y vuelve al menú principal mostrando la dificultad activa. |
 
-<p align="center"><em>Tabla 3: Caso de uso 2: El usuario cambia la dificultad del juego</em></p>
+<p align="center"><em>Tabla 2.3: Caso de uso 2: El usuario cambia la dificultad del juego</em></p>
 
  ## 2.2.3 Caso de uso 3: El usuario consulta los puntajes máximos
 
@@ -150,16 +155,16 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
 | Precondiciones | El sistema está encendido. No hay una partida en curso. El juego se encuentra en el menú principal. La EEPROM ha sido inicializada correctamente. |
 | Flujo principal | El jugador navega hasta el menú de “Puntajes” utilizando los mismos botones del juego. El sistema lee de la EEPROM los 3 puntajes máximos almacenados y los muestra en la pantalla LCD. 
 
-<p align="center"><em>Tabla 4: Caso de uso 3: El usuario consulta el puntaje máximo</em></p>
+<p align="center"><em>Tabla 2.4: Caso de uso 3: El usuario consulta el puntaje máximo</em></p>
 
-## 2.2 Elementos obligatorios de hardware:
+## 2.2 Elementos de hardware:
 
 ### 2.2.1 Buttons
 
 <table>
   <tr>
     <td width="60%" valign="top">
-      <p>Se utilizaron cuatro pulsadores <strong>Touch Switch de 7.5mm</strong> como dispositivos de entrada principal.</p>
+      <p>Se utilizaron cuatro pulsadores <strong>Touch Switch de 7,5mm</strong> como dispositivos de entrada principal.</p>
       <p><strong>Funcionalidad:</strong></p>
       <ul>
         <li>Navegación por el menú.</li>
@@ -171,7 +176,7 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/6a23cbbe-e4e6-4d44-b88c-07d74bc2121b" width="250">
       <br><br>
-      <em>Imagen 1: Pulsador de base grande utilizado.</em>
+      <em>Imagen 2.1: Pulsador de base grande utilizado.</em>
     </td>
   </tr>
 </table>
@@ -186,12 +191,12 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/a923bc55-ecc7-4221-8a0b-ecd35c741caf" width="200">
       <br><br>
-      <em>Imagen 2: Diodos LEDs utilizados.</em>
+      <em>Imagen 2.2: Diodos LEDs utilizados.</em>
     </td>
   </tr>
 </table>
 
-### 2.2.3 LDR (Sensor Analógico)
+### 2.2.3 LDR (Sensor analógico)
 <table>
   <tr>
     <td width="60%" valign="top">
@@ -200,7 +205,7 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/0886f18a-fa2f-44a9-8f7c-94493d16a883" width="176">
       <br><br>
-      <em>Imagen 3: Sensor LDR utilizado.</em> 
+      <em>Imagen 2.3: Sensor LDR utilizado.</em> 
     </td>
   </tr>
 </table>
@@ -214,12 +219,12 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/925e7613-ac74-4276-904e-c581b1f05a5e" width="200">
       <br><br>
-      <em>Imagen 4: Display LCD utilizado.</em>
+      <em>Imagen 2.4: Display LCD utilizado.</em>
     </td>
   </tr>
 </table>
 
-### 2.2.5 Memoria E2PROM Externa
+### 2.2.5 Memoria E2PROM externa
 <table>
   <tr>
     <td width="60%" valign="top">
@@ -229,12 +234,12 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/65b4cff7-fc20-4808-9c69-925c4ad1f505" width="200">
       <br><br>
-      <em>Imagen 5: Memoria externa utilizada.</em>
+      <em>Imagen 2.5: Memoria externa utilizada.</em>
     </td>
   </tr>
 </table>
 
-### 2.2.6 Placa de Desarrollo (Microcontrolador)
+### 2.2.6 Placa de desarrollo (Microcontrolador)
 <table>
   <tr>
     <td width="55%" valign="top">
@@ -244,13 +249,13 @@ En la Tabla 2.1 se detallan los principales requisitos funcionales del sistema:
     <td width="45%" align="center">
       <img src="https://github.com/user-attachments/assets/a657bf6e-783d-4a81-aee4-6a8a7ba27641" width="280">
       <br>
-      <em>Imagen 6: Placa NUCLEO-F103RBTX utilizada.</em>
+      <em>Imagen 2.6: Placa NUCLEO-F103RBTX utilizada.</em>
     </td>
   </tr>
 </table>
 
 # 3. Diseño e implementación 
-## 3.1 Documentar esquema eléctrico y conexión de placas
+## 3.1 Esquema eléctrico y conexión de placas
 
 Para la integración física del sistema se soldó a una placa experimental de (15 x 20) cm para garantizar la robustez mecánica y eléctrica del prototipo. El circuito se centra en la placa de desarrollo STM32, la cual gestiona los periféricos mediante las siguientes interfaces:
 
@@ -262,69 +267,69 @@ Bus de Comunicación (I2C): En dos pines preconfigurados SCL y SDA fueron inicia
 
 Sensores Analógicos (ADC): En un pin preconfigurado al seleccionar en el archivo .ioc conectaremos el LDR tal que pueda enviar las muestras obtenidas al inicializar.
 
-Se tiene una noción visual de la configuración de cada pin con la siguiente figura:
+Se tiene una noción visual de la configuración de cada pin en la iamgen 3.1:
 
   <div align="center">
   <img width="440" height="450" alt="image" src="https://github.com/user-attachments/assets/a9a2d5ef-5c2f-4131-9a0c-987458883e0c" />
-  <p><em>Imagen 7: IOC.</em></p>
+  <p><em>Imagen 3.1: IOC.</em></p>
 </div>
 
-A continuación se tiene tanto la placa Nucleo como el display LCD encastrados en los pines hembra dispuestos tal que:
+A continuación, en la imagen 3.2 se tienen los diversos componentes conectados a la placa experimental:
 
   <div align="center">
   <img width="600" height="1000" alt="Gemini_Generated_Image_wrktq6wrktq6wrkt" src="https://github.com/user-attachments/assets/3a13e912-17ae-497b-986e-324b3b6481b0" />
-  <p><em>Imagen 8: Placa soldada frente.</em></p>
+  <p><em>Imagen 3.2: Placa soldada frente.</em></p>
 </div>
 
-También, se puede ver las soldaduras en la placa en su otra cara:
+También, se puede ver en la imagen 3.3 las soldaduras en la placa en su otra cara:
 
   <div align="center">
   <img width="576" height="1125" alt="Gemini_Generated_Image_ww0mpwww0mpwww0m" src="https://github.com/user-attachments/assets/b5015b90-6761-4323-92ef-d555fa747698" />  
-  <p><em>Imagen 9: Placa soldada dorso.</em></p>
+  <p><em>Imagen 3.3: Placa soldada dorso.</em></p>
 </div>
 
-El sistema se alimenta por USB de la Nucleo, pudiendo verse el siguiente esquema:
+El sistema se alimenta por USB de la Nucleo, pudiendo verse en la Imagen 3.4:
 
   <div align="center">
   <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/a2a4f49f-4e85-42ec-a75d-7384a59d4de3" />
-  <p><em>Imagen 10: Diseño esquema eléctrico.</em></p>
+  <p><em>Imagen 3.4: Diseño esquema eléctrico.</em></p>
 </div>
 
-## 3.2 Descripción del Esquema Eléctrico 
+## 3.2 Descripción del esquema eléctrico 
 
 El circuito integra tres bloques funcionales principales: una etapa de sensado de luz con el sensor LDR de manera analógica, una etapa de entrada de usuario mediante pulsadores y una etapa de visualización de estado mediante diodos LED. Todas las señales están referenciadas a una tierra común, GND.
 
-El LDR está configurado junto con una resistencia fija de 10 kΩ. El nodo central del divisor está conectado a la entrada PA1. La variación de la resistencia del LDR en función de la luz incidente provocará un cambio en el voltaje analógico en PA1, permitiendo al microcontrolador leer la intensidad lumínica ambiental.
+El LDR visto en la figura 2.3 está configurado junto con una resistencia fija de 10 kΩ. El nodo central del divisor está conectado a la entrada PA1. La variación de la resistencia del LDR en función de la luz incidente provocará un cambio en el voltaje analógico en PA1, permitiendo al microcontrolador leer la intensidad lumínica ambiental.
 
-Cada pulsador está configurado de manera que las entradas de señal (PC10, PD2, PC2, PC1) no reciben tensión ni corriente hasta que el botón sea presionado. Al presionar el botón, en el circuito se envía una señal al microcontrolador para que sea activada la luz LED correspondiente. Las cuatro LED están conectadas en serie con una resistencia limitadora de corriente de 100 Ω para proteger el componente. Los ánodos de los LEDs reciben la señal de control desde las entradas PA6, PB1, PB0 y PA7, mientras que los cátodos están conectados a tierra común.
+Cada pulsador de los vistos en la iamgen 2.1 está configurado de manera que las entradas de señal (PC10, PD2, PC2, PC1) no reciben tensión ni corriente hasta que el botón sea presionado. Al presionar el botón, en el circuito se envía una señal al microcontrolador para que sea activada la luz LED correspondiente. Las cuatro LED están conectadas en serie con una resistencia limitadora de corriente de 100 Ω para proteger el componente. Los ánodos de los LEDs reciben la señal de control desde las entradas PA6, PB1, PB0 y PA7, mientras que los cátodos están conectados a tierra común.
 
 ## 3.3 Descripción del comportamiento
+
+Podemos ver cómo se comporta el sistema a partir de la imagen 3.5, pasando por los estados de menú de acuerdo a lo que el usuario haga; para ejecutar los distintos eventos, se deben presionar los distintos pulsadores. Las instrucciones para cuál pulsador presionar se ven en el estado ST_MEN_MENU; luego de esa introducción se pasa al ST_MEN_MENU1, donde se verá la opción de seleccionar el modo de juego en ST_MEN_MENU3 o ver el historial de puntajes en ST_MEN_MENU3. 
 
   <div align="center">
   <img width="941" height="432" alt="image" src="https://github.com/user-attachments/assets/60a716ed-63ae-4e5f-8e8b-5b06931d566d" />
 
-  <p><em>Imagen 11: Diagrama de estados.</em></p>
+  <p><em>Imagen 3.5: Diagrama de estados.</em></p>
 </div>
-
-Podemos ver cómo se comporta el sistema a partir de la imagen 11, pasando por los estados de menú de acuerdo a lo que el usuario haga; para ejecutar los distintos eventos, se deben presionar los distintos pulsadores. Las instrucciones para cuál pulsador presionar se ven en el estado ST_MEN_MENU; luego de esa introducción se pasa al ST_MEN_MENU1, donde se verá la opción de seleccionar el modo de juego en ST_MEN_MENU3 o ver el historial de puntajes en ST_MEN_MENU3. 
 
 Pasando al ST_MEN_MENU2, allí se seleccionará el modo de juego, siendo difícil o normal; cada uno, al ser seleccionado, pasará a su respectivo evento donde se desarrollará el juego.
 
 Finalmente, una vez que finalice el juego, sin importar el modo anteriormente seleccionado, se pasará al evento EV_GAME_OVER, que nos dejará en el estado ST_MEN_MENU4. Ahí se visualizará una indicación de fin de juego y se pasará a ST_MEN_MENU1 nuevamente.
 
 ## 3.4 Firmware del Simon Says:
-Este proyecto implementa un enfoque orientado a eventos y polling no bloqueante, tal que en varios módulos hay implementadas funciones interfaz que permiten comunicación entre diferentes máquinas de estados, a continuación un ejemplo en el que se puede ver cómo ayuda esta metodología a respetar un aspecto básico como lo es la modularización en este proyecto:
+Este proyecto implementa un enfoque orientado a eventos y polling no bloqueante, tal que en varios módulos hay implementadas funciones interfaz que permiten comunicación entre diferentes máquinas de estados, a continuación en la imagen 3.6 un ejemplo en el que se puede ver cómo ayuda esta metodología a respetar un aspecto básico como lo es la modularización en este proyecto:
 
   <div align="center">
   <img width="857" height="170" alt="image" src="https://github.com/user-attachments/assets/e48f5359-6c7d-4efc-a687-6680d2200db9" />
-  <p><em>Imagen 11: Fragmento de código de task_gameplay.c.</em></p>
+  <p><em>Imagen 3.6: Fragmento de código de task_gameplay.c.</em></p>
 </div>
 
-### 3.4.1 Task Actuator
+### 3.4.1 Task actuator
 
 Módulo encargado de administrar estados básicos de los leds mediante una MEF. Esto permite desacoplar la lógica del juego del manejo directo de los pines. 
 
-### 3.4.2 Task Sensor
+### 3.4.2 Task sensor
 
 Este módulo es responsable de la gestión de la interfaz de entrada física mediante una MEF. Su función principal es realizar el filtrado digital de las señales (software debouncing) para eliminar los rebotes mecánicos inherentes a los botones.
 
@@ -344,7 +349,7 @@ Es el núcleo lógico del proyecto. Implementa una  MEF que gestiona las reglas 
 - Gestión de los niveles de dificultad ("Normal" y "Difícil").
 - Determinación de las condiciones de victoria o derrota (Game Over).
 
-### 3.4.6 Task Storage
+### 3.4.6 Task storage
 
 Este módulo implementa la lógica de persistencia de datos. Se encarga de verificar si el puntaje obtenido al finalizar una partida califica como un "Récord Histórico". Si es así, gestiona la estructura de datos (Puntaje + Iniciales) y solicita su escritura en la memoria no volátil. Al inicio del sistema, recupera y ordena estos datos para su visualización.
 
@@ -367,10 +372,10 @@ Módulo encargado de la navegación del sistema cuando no se está en una partid
 Para evaluar la eficiencia energética del sistema, se realizaron mediciones de corriente en dos escenarios operativos: **Modo Activo** (*Run Mode*) y **Modo Bajo Consumo** (*Sleep Mode*).
 
 Las mediciones se dividen en dos categorías:
-1.  **Consumo de Periféricos:** Componentes externos (LEDs, Display, Sensores). Su consumo es independiente del estado del microcontrolador.
-2.  **Consumo del Microcontrolador (MCU):** Medido a través del *Jumper IDD* (JP5) de la placa Nucleo.
+1.  **Consumo de periféricos:** Componentes externos (LEDs, Display, Sensores). Su consumo es independiente del estado del microcontrolador.
+2.  **Consumo del microcontrolador (MCU):** Medido a través del *Jumper IDD* (JP5) de la placa Nucleo.
 
-Para evaluar la eficiencia energética del sistema, se realizaron mediciones de corriente comparativas en dos escenarios operativos: **Modo Activo** (*Run Mode*) y **Modo Bajo Consumo** (*Sleep Mode*).
+Para evaluar la eficiencia energética del sistema, se realizaron mediciones de corriente en la tabla 4.1 en dos escenarios operativos: **Modo Activo** (*Run Mode*) y **Modo Bajo Consumo** (*Sleep Mode*).
 
 <div align="center">
   <table border="1" style="border-collapse: collapse; text-align: center;">
@@ -385,26 +390,26 @@ Para evaluar la eficiencia energética del sistema, se realizaron mediciones de 
     <tbody>
       <tr>
         <td align="left"><strong>MCU (Jumper JP5 - IDD)</strong></td>
-        <td><strong>38.8 mA</strong></td>
-        <td><strong>38.8 mA</strong></td>
+        <td><strong>38,8 mA</strong></td>
+        <td><strong>38,8 mA</strong></td>
         <td align="left">Consumo del microcontrolador.</td>
       </tr>
       <tr>
         <td align="left">LED Azul (ON)</td>
-        <td>0.146 mA</td>
-        <td>0.146 mA</td>
+        <td>0,146 mA</td>
+        <td>0,146 mA</td>
         <td align="left">Consumo constante si está encendido.</td>
       </tr>
       <tr>
         <td align="left">LED Rojo (ON)</td>
-        <td>0.120 mA</td>
-        <td>0.120 mA</td>
+        <td>0,120 mA</td>
+        <td>0,120 mA</td>
         <td align="left">Consumo constante si está encendido.</td>
       </tr>
       <tr>
         <td align="left">Pulsador (Presionado)</td>
-        <td>0.333 mA</td>
-        <td>0.333 mA</td>
+        <td>0,333 mA</td>
+        <td>0,333 mA</td>
         <td align="left">Depende de resistencia interna.</td>
       </tr>
       <tr>
@@ -427,7 +432,7 @@ Para evaluar la eficiencia energética del sistema, se realizaron mediciones de 
       </tr>
     </tbody>
   </table>
-  <p><em>Tabla 5: Comparativa de consumo de corriente en los distintos modos de operación.</em></p>
+  <p><em>Tabla 4.1: Comparativa de consumo de corriente en los distintos modos de operación.</em></p>
 </div>
 
 <p><strong>Conclusión del análisis de consumo:</strong><br>
@@ -441,8 +446,7 @@ Nota: Dada esta ausencia de diferencia significativa en el consumo base del MCU,
 Se determinó el Worst Case Execution Time (WCET) de cada tarea del sistema utilizando el Timer DWT (Data Watchpoint and Trace) del microcontrolador para contar ciclos de reloj exactos antes y después de cada función task_update, convirtiendo luego esos ciclos a microsegundos. 
 Este parámetro es crítico para garantizar que el sistema cumpla con los requisitos de tiempo real (Soft Real-Time) y no se produzca pérdida de eventos.
 
-<h3>4.2.1 Tabla Detallada de WCET por Estados</h3>
-<p>A continuación se detallan los tiempos de ejecución medidos (en $\mu s$) y el porcentaje de uso de CPU para cada tarea, dependiendo del estado en el que se encuentra la Máquina de Estados del sistema.</p>
+<p>A continuación en la tabla 4.2 se detallan los tiempos de ejecución medidos (en $\mu s$) y el porcentaje de uso de CPU para cada tarea, dependiendo del estado en el que se encuentra la Máquina de Estados del sistema.</p>
 
 <div align="center">
   <table border="1" style="border-collapse: collapse; text-align: center;">
@@ -461,7 +465,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
     </thead>
     <tbody>
       <tr>
-        <td align="left"><strong>Task Sensor</strong></td>
+        <td align="left"><strong>Task sensor</strong></td>
         <td>12</td>
         <td>13</td>
         <td>13</td>
@@ -472,7 +476,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
         <td>13</td>
       </tr>
       <tr>
-        <td align="left"><strong>Task Actuator</strong></td>
+        <td align="left"><strong>Task actuator</strong></td>
         <td>4</td>
         <td>5</td>
         <td>5</td>
@@ -483,7 +487,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
         <td>5</td>
       </tr>
       <tr>
-        <td align="left"><strong>Task Display</strong></td>
+        <td align="left"><strong>Task display</strong></td>
         <td>4</td>
         <td>76</td>
         <td>76</td>
@@ -494,7 +498,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
         <td>76</td>
       </tr>
       <tr>
-        <td align="left"><strong>Task Menu</strong></td>
+        <td align="left"><strong>Task menu</strong></td>
         <td>3</td>
         <td>72</td>
         <td>78</td>
@@ -527,7 +531,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
         <td>3</td>
       </tr>
       <tr>
-        <td align="left"><strong>Task Gameplay</strong></td>
+        <td align="left"><strong>Task gameplay</strong></td>
         <td>4</td>
         <td>9</td>
         <td>9</td>
@@ -538,7 +542,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
         <td>9</td>
       </tr>
       <tr>
-        <td align="left"><strong>Task Storage</strong></td>
+        <td align="left"><strong>Task storage</strong></td>
         <td>199</td>
         <td>199</td>
         <td>199</td>
@@ -550,18 +554,18 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
       </tr>
       <tr style="border-top: 2px solid #000; background-color: #fffde7;">
         <td align="left"><strong>CPU Usage (%)</strong></td>
-        <td>24.8%</td>
-        <td>39.7%</td>
-        <td>40.3%</td>
-        <td>41.3%</td>
-        <td>83.2%</td>
-        <td>83.2%</td>
-        <td>83.2%</td>
-        <td>82.9%</td>
+        <td>24,8%</td>
+        <td>39,7%</td>
+        <td>40,3%</td>
+        <td>41,3%</td>
+        <td>83,2%</td>
+        <td>83,2%</td>
+        <td>83,2%</td>
+        <td>82,9%</td>
       </tr>
     </tbody>
   </table>
-  <p><em>Tabla 6: Evolución del WCET y Carga del CPU según el estado del juego.</em></p>
+  <p><em>Tabla 4.2: Evolución del WCET y carga del CPU según el estado del juego.</em></p>
 </div>
 
 <p><strong>Observaciones:</strong><br>
@@ -586,14 +590,14 @@ $$U_{max} = \frac{13 + 5 + 76 + 128 + 20 + 3 + 9 + 578}{1000} \times 100$$
 
 $$U_{max} = \frac{832 \mu s}{1000 \mu s} \times 100$$
 
-$$U_{max} = \mathbf{83.2\%}$$
+$$U_{max} = \mathbf{83,2\%}$$
 
 **Conclusión:**
-El factor de uso máximo calculado es del **83.2%**. Dado que $U < 100\%$, se concluye que el sistema es **planificable**. El procesador dispone de un margen libre (*Slack Time*) del **16.8%** (~168 $\mu s$ por ciclo), tiempo durante el cual entra en modo *Sleep* para reducir el consumo energético.
+El factor de uso máximo calculado es del **83,2%**. Dado que $U < 100\%$, se concluye que el sistema es **planificable**. El procesador dispone de un margen libre (*Slack Time*) del **16.8%** (~168 $\mu s$ por ciclo), tiempo durante el cual entra en modo *Sleep* para reducir el consumo energético.
 
 ## 4.4 Cumplimiento de requisitos  
 
-Una vez finalizado el trabajo, se realizó una tabla con los requisitos iniciales, agregando el estado de los mismos. Esto se observa en la tabla 4.2.
+Una vez finalizado el trabajo, se realizó la tabla 4.3 con los requisitos iniciales, agregando el estado de los mismos.
 
 | Grupo | ID | Descripción | Estado |
 | :---- | :---- | :---- | :---- |
@@ -637,43 +641,59 @@ Una vez finalizado el trabajo, se realizó una tabla con los requisitos iniciale
 |  | 9.2 | El sistema organizará su lógica en una máquina de estados para evitar bloqueos y comportamientos impredecibles. | Completo 🟢 |
 |  | 9.3 | El sistema deberá indicar mediante mensajes en la pantalla y señales sonoras si ocurre un error interno o condición inesperada. | Cancelado 🔴 |
 
-<p align="center"><em>Tabla 7: Cumplimiento de requisitos</em></p>
+<p align="center"><em>Tabla 4.3: Cumplimiento de requisitos</em></p>
 
 Se observa que la gran mayoría de los requisitos se cumplieron para este proyecto. Solamente resta agregar el audio que no se realizó debido al tiempo límite del proyecto. Este siendo el requisito más inconsecuente de todos; por más que sea una ayuda al jugador una indicación de audio, esto no le impide el juego al usuario y puede ser usado de todas maneras.
 
 
-## 4.5 Reporte de Uso
-Se muestra en "Console & Build Analyzer":
+## 4.5 Reporte de uso
+Se muestra el "Console" en la imagen 4.1 como también el "Build Analyzer" en la figura 4.2:
   <div align="center">
   <img width="550" height="156" alt="Captura de pantalla 2026-02-17 091647" src="https://github.com/user-attachments/assets/4dcc685b-f506-4dbb-94a7-4577b9bfcd3b" />
-  <p><em>Imagen 12: Resumen del proceso de compilación (Build Output).</em></p>
+  <p><em>Imagen 4.1: Resumen del proceso de compilación (Build Output).</em></p>
 </div>
   <div align="center">
   <img width="696" height="62" alt="Captura de pantalla 2026-02-17 093125" src="https://github.com/user-attachments/assets/fc268403-327b-462b-ab67-52ebe046923a" />
-  <p><em>Imagen 13: Reporte de ocupación de memoria (Size Report).</em></p>
+  <p><em>Imagen 4.2: Reporte de ocupación de memoria (Size Report).</em></p>
 </div>
 
-Se observa que el firmware actual ocupa el 26.81% de la capacidad de almacenamiento y el 14.84% de la memoria dinámica disponible. Esto indica que el sistema posee un amplio margen de recursos excedentes , permitiendo futuras expansiones o la adición de funcionalidades complejas sin riesgo de desbordamiento de memoria (Stack Overflow) o falta de espacio en el disco.
+Se observa que el firmware actual ocupa el 26,81% de la capacidad de almacenamiento y el 14,84% de la memoria dinámica disponible. Esto indica que el sistema posee un amplio margen de recursos excedentes , permitiendo futuras expansiones o la adición de funcionalidades complejas sin riesgo de desbordamiento de memoria (Stack Overflow) o falta de espacio en el disco.
 
-## 4.6 Prueba de Integración 
+## 4.6 Prueba de integración 
 
 Se dejará adjunto un link funcional al video: https://youtu.be/UB5wlkK1kCw
 
-# 5.Bibliografía
-https://www.alldatasheet.com/datasheet-pdf/view/75272/MICRO-ELECTRONICS/MBB51D.html 
+# 5.Conclusiones
 
-https://www.alldatasheet.com/datasheet-pdf/view/574755/ATMEL/AT24C256.html 
+## 5.1 Resultados obtenidos
 
-https://www.nubbeo.com.ar/productos/modulo-memoria-at24c256-i2c-256kbits-32kbytes-arduino-nubbeo/
+Para concluir el informe y el trabajo, pudimos integrar los componentes con las aplicaciones y programas requeridos, logrando su ejecución sin un delay excesivo y con máxima eficiencia. Mientras que hubo dificultades, como por ejemplo la integración del modo sleep, por su mayor parte estas pudieron ser resueltas de manera exitosa. 
 
-https://embeddedprojects101.com/how-to-interface-an-i2c-eeprom-with-stm32/#:~:text=I2C%20de%20Microchip.-,Configuraci%C3%B3n%20de%20pines%20y%20direcciones%20de%20la%20EEPROM,En%20nuestro%20caso%2C%20son%201010.
+Tomamos como aprendizaje los funcionamientos de los sistemas embebidos y cómo estos son integrados a variedades de proyectos con mucho alcance y uso en el ámbito profesional.
 
-https://deepbluembedded.com/stm32-eeprom-flash-emulation-fee-read-write-examples/#:~:text=STM32%20microcontrollers%20don't%20have,to%20implement%20in%20this%20tutorial. 
+## 5.2 Próximos pasos
 
-https://wiki.st.com/stm32mcu/wiki/Getting_started_with_I2C 
+Para continuar este proyecto, podríamos rediseñar la interfaz del usuario para que, con un mayor presupuesto, podamos agregar una carcasa exterior y botones más grandes que sean más satisfactorios para presionar y así brindar una mejor experiencia al usuario. También consideramos agregar el sonido que no pudimos incluir por restricciones de tiempo.
 
-https://campusgrado.fi.uba.ar/course/view.php?id=1217&section=21#tabs-tree-starthttps://campusgrado.fi.uba.ar/course/view.php?id=1217&section=22#tabs-tree-start
+# 6.Bibliografía
+[1]https://www.alldatasheet.com/datasheet-pdf/view/75272/MICRO-ELECTRONICS/MBB51D.html 
 
-https://web.alfredstate.edu/faculty/weimandn/programming/lcd/ATmega328/LCD_code_gcc_4d.html
+[2]https://www.alldatasheet.com/datasheet-pdf/view/574755/ATMEL/AT24C256.html 
 
-https://www.arm.com/resources/education/books/designing-embedded-systems
+[3]https://www.nubbeo.com.ar/productos/modulo-memoria-at24c256-i2c-256kbits-32kbytes-arduino-nubbeo/
+
+[4]https://embeddedprojects101.com/how-to-interface-an-i2c-eeprom-with-stm32/#:~:text=I2C%20de%20Microchip.-,Configuraci%C3%B3n%20de%20pines%20y%20direcciones%20de%20la%20EEPROM,En%20nuestro%20caso%2C%20son%201010.
+
+[5]https://deepbluembedded.com/stm32-eeprom-flash-emulation-fee-read-write-examples/#:~:text=STM32%20microcontrollers%20don't%20have,to%20implement%20in%20this%20tutorial. 
+
+[6]https://wiki.st.com/stm32mcu/wiki/Getting_started_with_I2C 
+
+[7]https://campusgrado.fi.uba.ar/course/view.php?id=1217&section=21#tabs-tree-starthttps://campusgrado.fi.uba.ar/course/view.php?id=1217&section=22#tabs-tree-start
+
+[8]https://web.alfredstate.edu/faculty/weimandn/programming/lcd/ATmega328/LCD_code_gcc_4d.html
+
+[9]https://www.arm.com/resources/education/books/designing-embedded-systems
+
+[10]https://www.sciencedirect.com/science/article/pii/S2405844020309919
+
+[11]https://www.sciencedirect.com/science/article/abs/pii/S0003687012001226
