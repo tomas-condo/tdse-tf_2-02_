@@ -25,18 +25,18 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
 2. [Introducción específica](#introducción-específica)
     - [2.1 Requisitos del proyecto](#21-requisitos-del-proyecto)
     - [2.2 Casos de uso](#22-casos-de-uso)
-        - [2.2.1 Caso de uso 1: El usuario juega una partida en modo clásico](#221-caso-de-uso-1-el-usuario-juega-una-partida-en-modo-clasico)
+        - [2.2.1 Caso de uso 1: El usuario juega una partida en modo clásico](#221-caso-de-uso-1-el-usuario-juega-una-partida-en-modo-clásico)
         - [2.2.2 Caso de uso 2: El usuario cambia la dificultad del juego](#222-caso-de-uso-2-el-usuario-cambia-la-dificultad-del-juego)
-        - [2.2.3 Caso de uso 3: El usuario consulta los puntajes máximos](#223-caso-de-uso-3-el-usuario-consulta-los-puntajes-maximos)
-    - [2.2 Elementos de hardware](#22-elementos-de-hardware)
-        - [2.2.1 Buttons](#221-buttons)
-        - [2.2.2 Leds (Diodos Emisores de Luz)](#222-leds-(diodos-emisores-de-luz))
-        - [2.2.3 LDR sensor analógico](#223-ldr-sensor-analogico)
-        - [2.2.4 Display LCD](#224-display-lcd)
-        - [2.2.5 Memoria E2PROM externa](#225-memoria-e2prom-externa)
-        - [2.2.6 Placa de desarrollo](#226-placa-de-desarrollo)
-3. [Diseño de implementación](3-diseño-de-implementacion)
-    - [3.1 Esquema eléctrico y conexión de placas](#31-esquema-electrico-y-conexion-de-placas)
+        - [2.2.3 Caso de uso 3: El usuario consulta los puntajes máximos](#223-caso-de-uso-3-el-usuario-consulta-los-puntajes-máximos)
+    - [2.3 Elementos de hardware](#22-elementos-de-hardware)
+        - [2.3.1 Buttons](#221-buttons)
+        - [2.3.2 Leds (Diodos Emisores de Luz)](#222-leds-(diodos-emisores-de-luz))
+        - [2.3.3 LDR sensor analógico](#223-ldr-sensor-analógico)
+        - [2.3.4 Display LCD](#224-display-lcd)
+        - [2.3.5 Memoria E2PROM externa](#225-memoria-e2prom-externa)
+        - [2.3.6 Placa de desarrollo](#226-placa-de-desarrollo)
+3. [Diseño de implementación](3-diseño-de-implementación)
+    - [3.1 Esquema eléctrico y conexión de placas](#31-esquema-eléctrico-y-conexion-de-placas)
     - [3.2 Descripción del esquema eléctrico](#32-descripción-del-esquema-eléctrico)
     - [3.3 Descripción del comportamiento](#33-descripción-del-comportamiento)
     - [3.4 Firmware del Simon Says](#34-firmware-del-simon-says)
@@ -51,15 +51,15 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
         - [3.4.9 Task menu](#349-task-menu)
 4. [Ensayos y resultados](#4-ensayos-y-resultados)
     - [4.1 Medición y análisis de consumo](#41-medición-y-análisis-de-consumo)
-    - [4.2 Medición y análisis de tiempos de ejecución (WCET)](#42-medición-y-analisis-de-tiempos-de-ejecución-(WCET))
-    - [4.3 Cálculo del factor de uso (U) de la CPU](#43-calculo-del-factor-de-uso-u-de-la-cpu)
+    - [4.2 Medición y análisis de tiempos de ejecución (WCET)](#42-medición-y-análisis-de-tiempos-de-ejecución-(WCET))
+    - [4.3 Cálculo del factor de uso (U) de la CPU](#43-cálculo-del-factor-de-uso-u-de-la-cpu)
     - [4.4 Cumplimiento de requisitos](#44-cumplimiento-de-requisitos)
     - [4.5 Reporte de uso](#45-reporte-de-uso)
-    - [4.6 Prueba de integración](#46-prueba-de-integracion)
+    - [4.6 Prueba de integración](#46-prueba-de-integración)
 5. [Conclusiones](#5-conclusiones)
     - [5.1 Resultados obtenidos](#51-resultados-obtenidos)
-    - [5.2 Próximos pasos](#52-proximos-pasos)
-6. [Bibliografía](#6-bibliografia)
+    - [5.2 Próximos pasos](#52-próximos-pasos)
+6. [Bibliografía](#6-bibliografía)
 
 
 # **Introducción general** 
@@ -157,9 +157,9 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
 
 <p align="center"><em>Tabla 2.4: Caso de uso 3: El usuario consulta el puntaje máximo</em></p>
 
-## 2.2 Elementos de hardware:
+## 2.3 Elementos de hardware:
 
-### 2.2.1 Buttons
+### 2.3.1 Buttons
 
 <table>
   <tr>
@@ -181,7 +181,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-### 2.2.2 Leds (Diodos Emisores de Luz)
+### 2.3.2 Leds (Diodos Emisores de Luz)
 <table>
   <tr>
     <td width="60%" valign="top">
@@ -196,7 +196,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-### 2.2.3 LDR (Sensor analógico)
+### 2.3.3 LDR (Sensor analógico)
 <table>
   <tr>
     <td width="60%" valign="top">
@@ -210,7 +210,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-### 2.2.4 Display LCD
+### 2.3.4 Display LCD
 <table>
   <tr>
     <td width="60%" valign="top">
@@ -224,7 +224,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-### 2.2.5 Memoria E2PROM externa
+### 2.3.5 Memoria E2PROM externa
 <table>
   <tr>
     <td width="60%" valign="top">
@@ -239,7 +239,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
   </tr>
 </table>
 
-### 2.2.6 Placa de desarrollo (Microcontrolador)
+### 2.3.6 Placa de desarrollo (Microcontrolador)
 <table>
   <tr>
     <td width="55%" valign="top">
