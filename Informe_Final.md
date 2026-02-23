@@ -14,7 +14,7 @@
 ### *Resumen*
 En este trabajo se realiza el diseño e implementación del juego "Simon Dice" basado en la arquitectura ARM Cortex-M3. Este sistema tiene por objetivo proporcionar una plataforma de entretenimiento y entrenamiento cognitivo, permitiendo al usuario ejercitar su memoria a corto plazo mediante la reproducción de secuencias aleatorias de luces. El sistema cuenta con características avanzadas como regulación automática de brillo ambiental mediante sensores LDR, almacenamiento no volátil de puntajes máximos en memoria EEPROM y una interfaz de usuario rica visualizada en un display LCD de 20x4 caracteres.
 
-La implementación del mismo se realizó bajo el paradigma Bare Metal (sin sistema operativo), utilizando lenguaje C y manipulando directamente los registros de la placa STM32 Nucleo-F103RB. El diseño de software se estructura estrictamente mediante Máquinas de Estados Finitos (FSM) jerárquicas y modularizadas, garantizando un código robusto, escalable y mantenible.
+La implementación del mismo se realizó bajo el paradigma Bare Metal (sin sistema operativo), utilizando lenguaje C y manipulando directamente los registros de la placa STM32 Nucleo-F103RB. El diseño de software se estructura estrictamente mediante Máquinas de Estados Finitos (FSM) jerárquicas y modularizadas, lo que garantiza un código robusto, escalable y mantenible.
 
 En esta memoria se presenta la motivación del proyecto, el diseño del hardware y firmware, y los resultados de los ensayos funcionales.
   
@@ -29,7 +29,7 @@ En esta memoria se presenta la motivación del proyecto, el diseño del hardware
         - [2.2.2 Caso de uso 2: El usuario cambia la dificultad del juego](#222-caso-de-uso-2-el-usuario-cambia-la-dificultad-del-juego)
         - [2.2.3 Caso de uso 3: El usuario consulta los puntajes máximos](#223-caso-de-uso-3-el-usuario-consulta-los-puntajes-máximos)
     - [2.3 Elementos de hardware](#23-elementos-de-hardware)
-        - [2.3.1 Buttons](#231-buttons)
+        - [2.3.1 Pulsadores](#231-pulsadores)
         - [2.3.2 Leds (Diodos Emisores de Luz)](#232-leds-diodos-emisores-de-luz)
         - [2.3.3 LDR sensor analógico](#233-ldr-sensor-analógico)
         - [2.3.4 Display LCD](#234-display-lcd)
@@ -72,7 +72,7 @@ En el mercado existen diversos productos relacionados con juegos de memoria y re
 
 El juguete clásico no guarda el historial de las diversas partidas y, al tener una dificultad fija que se acelera demasiado rápido para un paciente en rehabilitación o un niño con dificultades de aprendizaje vimos una oportunidad de mejora y de inclusión. 
 
-Se tomó como referente [Lumosity](https://app.lumosity.com/es/landing), [CogniFit](https://www.cognifit.com/ar?srsltid=AfmBOooEsyYxj9pAMaxhdNQi1WLkWoFHKCuE0GOEz-8ze5Ma6s48iJ-7) y [Peak](https://www.peak.net/), aplicaciones de ejercicios mentales en tablet/celular para analizar las diversas opciones que el mercado ofrece. Estás tienen la desventaja de la barrera tecnológica, a los adultos mayores les cuesta usar pantallas táctiles, por lo que, un botón físico grande e iluminado es más intuitivo. Además, al ser utilizadas en pantallas táctiles no trabajan la motricidad fina ni la propiocepción de la misma forma que presionar un botón mecánico real. 
+Se tomó como referente [Lumosity](https://app.lumosity.com/es/landing), [CogniFit](https://www.cognifit.com/ar?srsltid=AfmBOooEsyYxj9pAMaxhdNQi1WLkWoFHKCuE0GOEz-8ze5Ma6s48iJ-7) y [Peak](https://www.peak.net/), aplicaciones de ejercicios mentales en tablet/celular para analizar las diversas opciones que el mercado ofrece. Estás tienen la desventaja de la barrera tecnológica, ya que a los adultos mayores les cuesta usar pantallas táctiles, por lo que, un botón físico grande e iluminado es más intuitivo. Además, al ser utilizadas en pantallas táctiles no trabajan la motricidad fina ni la propiocepción de la misma forma que presionar un botón mecánico real. 
 
 El presente proyecto recupera ese aspecto físico y educativo, brindando un entorno ideal para el desarrollo de estimulación neurocognitiva que, a diferencia de los juguetes comerciales, que carecen de registros de progreso, este desarrollo propone una solución de bajo costo brindando esta posibilidad, sumado a la personalización de modos de juego, visibilidad y diversos parámetros como tiempo de encendido de luz a través de este prototipo basado en STM32. 
 
@@ -159,7 +159,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
 
 ## 2.3 Elementos de hardware:
 
-### 2.3.1 Buttons
+### 2.3.1 Pulsadores
 
 <table>
   <tr>
@@ -176,7 +176,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/6a23cbbe-e4e6-4d44-b88c-07d74bc2121b" width="250">
       <br><br>
-      <em>Imagen 2.1: Pulsador de base grande utilizado.</em>
+      <em>Figura 2.1: Pulsador de base grande utilizado.</em>
     </td>
   </tr>
 </table>
@@ -191,7 +191,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/a923bc55-ecc7-4221-8a0b-ecd35c741caf" width="200">
       <br><br>
-      <em>Imagen 2.2: Diodos LEDs utilizados.</em>
+      <em>Figura 2.2: Diodos LEDs utilizados.</em>
     </td>
   </tr>
 </table>
@@ -205,7 +205,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/0886f18a-fa2f-44a9-8f7c-94493d16a883" width="176">
       <br><br>
-      <em>Imagen 2.3: Sensor LDR utilizado.</em> 
+      <em>Figura 2.3: Sensor LDR utilizado.</em> 
     </td>
   </tr>
 </table>
@@ -219,7 +219,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/925e7613-ac74-4276-904e-c581b1f05a5e" width="200">
       <br><br>
-      <em>Imagen 2.4: Display LCD utilizado.</em>
+      <em>Figura 2.4: Display LCD utilizado.</em>
     </td>
   </tr>
 </table>
@@ -234,7 +234,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
     <td width="40%" align="center">
       <img src="https://github.com/user-attachments/assets/65b4cff7-fc20-4808-9c69-925c4ad1f505" width="200">
       <br><br>
-      <em>Imagen 2.5: Memoria externa utilizada.</em>
+      <em>Figura 2.5: Memoria externa utilizada.</em>
     </td>
   </tr>
 </table>
@@ -249,7 +249,7 @@ A continuación en las tablas 2.2, 2.3 y 2.4 se especificarán los diferentes ca
     <td width="45%" align="center">
       <img src="https://github.com/user-attachments/assets/a657bf6e-783d-4a81-aee4-6a8a7ba27641" width="280">
       <br>
-      <em>Imagen 2.6: Placa NUCLEO-F103RBTX utilizada.</em>
+      <em>Figura 2.6: Placa NUCLEO-F103RBTX utilizada.</em>
     </td>
   </tr>
 </table>
@@ -267,50 +267,50 @@ Bus de Comunicación (I2C): En dos pines preconfigurados SCL y SDA fueron inicia
 
 Sensores Analógicos (ADC): En un pin preconfigurado al seleccionar en el archivo .ioc conectaremos el LDR tal que pueda enviar las muestras obtenidas al inicializar.
 
-Se tiene una noción visual de la configuración de cada pin en la iamgen 3.1:
+Se tiene una noción visual de la configuración de cada pin en la figura 3.1:
 
   <div align="center">
   <img width="440" height="450" alt="image" src="https://github.com/user-attachments/assets/a9a2d5ef-5c2f-4131-9a0c-987458883e0c" />
-  <p><em>Imagen 3.1: IOC.</em></p>
+  <p><em>Figura 3.1: IOC.</em></p>
 </div>
 
-A continuación, en la imagen 3.2 se tienen los diversos componentes conectados a la placa experimental:
+A continuación, en la figura 3.2 se tienen los diversos componentes conectados a la placa experimental:
 
   <div align="center">
   <img width="600" height="1000" alt="Gemini_Generated_Image_wrktq6wrktq6wrkt" src="https://github.com/user-attachments/assets/3a13e912-17ae-497b-986e-324b3b6481b0" />
-  <p><em>Imagen 3.2: Placa soldada frente.</em></p>
+  <p><em>Figura 3.2: Placa soldada frente.</em></p>
 </div>
 
-También, se puede ver en la imagen 3.3 las soldaduras en la placa en su otra cara:
+También, se puede ver en la figura 3.3 las soldaduras en la placa en su otra cara:
 
   <div align="center">
   <img width="576" height="1125" alt="Gemini_Generated_Image_ww0mpwww0mpwww0m" src="https://github.com/user-attachments/assets/b5015b90-6761-4323-92ef-d555fa747698" />  
-  <p><em>Imagen 3.3: Placa soldada dorso.</em></p>
+  <p><em>Figura 3.3: Placa soldada dorso.</em></p>
 </div>
 
-El sistema se alimenta por USB de la Nucleo, pudiendo verse en la Imagen 3.4:
+El sistema se alimenta por USB de la Nucleo, pudiendo verse en la figura 3.4:
 
   <div align="center">
   <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/a2a4f49f-4e85-42ec-a75d-7384a59d4de3" />
-  <p><em>Imagen 3.4: Diseño esquema eléctrico.</em></p>
+  <p><em>Figura 3.4: Diseño esquema eléctrico.</em></p>
 </div>
 
 ## 3.2 Descripción del esquema eléctrico 
 
 El circuito integra tres bloques funcionales principales: una etapa de sensado de luz con el sensor LDR de manera analógica, una etapa de entrada de usuario mediante pulsadores y una etapa de visualización de estado mediante diodos LED. Todas las señales están referenciadas a una tierra común, GND.
 
-El LDR visto en la figura 2.3 está configurado junto con una resistencia fija de 10 kΩ. El nodo central del divisor está conectado a la entrada PA1. La variación de la resistencia del LDR en función de la luz incidente provocará un cambio en el voltaje analógico en PA1, permitiendo al microcontrolador leer la intensidad lumínica ambiental.
+El LDR visto en la figura 3.4 está configurado junto con una resistencia fija de 10 kΩ. El nodo central del divisor está conectado a la entrada PA1. La variación de la resistencia del LDR en función de la luz incidente provocará un cambio en el voltaje analógico en PA1, permitiendo al microcontrolador leer la intensidad lumínica ambiental.
 
-Cada pulsador de los vistos en la iamgen 2.1 está configurado de manera que las entradas de señal (PC10, PD2, PC2, PC1) no reciben tensión ni corriente hasta que el botón sea presionado. Al presionar el botón, en el circuito se envía una señal al microcontrolador para que sea activada la luz LED correspondiente. Las cuatro LED están conectadas en serie con una resistencia limitadora de corriente de 100 Ω para proteger el componente. Los ánodos de los LEDs reciben la señal de control desde las entradas PA6, PB1, PB0 y PA7, mientras que los cátodos están conectados a tierra común.
+Cada pulsador de los vistos en la figura 2.1 está configurado de manera que las entradas de señal (PC10, PD2, PC2, PC1) no reciben tensión ni corriente hasta que el botón sea presionado. Al presionar el botón, en el circuito se envía una señal al microcontrolador para que sea activada la luz LED correspondiente. Las cuatro LED están conectadas en serie con una resistencia limitadora de corriente de 100 Ω para proteger el componente. Los ánodos de los LEDs reciben la señal de control desde las entradas PA6, PB1, PB0 y PA7, mientras que los cátodos están conectados a tierra común.
 
 ## 3.3 Descripción del comportamiento
 
-Podemos ver cómo se comporta el sistema a partir de la imagen 3.5, pasando por los estados de menú de acuerdo a lo que el usuario haga; para ejecutar los distintos eventos, se deben presionar los distintos pulsadores. Las instrucciones para cuál pulsador presionar se ven en el estado ST_MEN_MENU; luego de esa introducción se pasa al ST_MEN_MENU1, donde se verá la opción de seleccionar el modo de juego en ST_MEN_MENU3 o ver el historial de puntajes en ST_MEN_MENU3. 
+Podemos ver cómo se comporta el sistema a partir de la figura 3.5, pasando por los estados de menú de acuerdo a lo que el usuario haga; para ejecutar los distintos eventos, se deben presionar los distintos pulsadores. Las instrucciones para cuál pulsador presionar se ven en el estado ST_MEN_MENU; luego de esa introducción se pasa al ST_MEN_MENU1, donde se verá la opción de seleccionar el modo de juego en ST_MEN_MENU3 o ver el historial de puntajes en ST_MEN_MENU3. 
 
   <div align="center">
   <img width="941" height="432" alt="image" src="https://github.com/user-attachments/assets/60a716ed-63ae-4e5f-8e8b-5b06931d566d" />
 
-  <p><em>Imagen 3.5: Diagrama de estados.</em></p>
+  <p><em>Figura 3.5: Diagrama de estados.</em></p>
 </div>
 
 Pasando al ST_MEN_MENU2, allí se seleccionará el modo de juego, siendo difícil o normal; cada uno, al ser seleccionado, pasará a su respectivo evento donde se desarrollará el juego.
@@ -318,11 +318,11 @@ Pasando al ST_MEN_MENU2, allí se seleccionará el modo de juego, siendo difíci
 Finalmente, una vez que finalice el juego, sin importar el modo anteriormente seleccionado, se pasará al evento EV_GAME_OVER, que nos dejará en el estado ST_MEN_MENU4. Ahí se visualizará una indicación de fin de juego y se pasará a ST_MEN_MENU1 nuevamente.
 
 ## 3.4 Firmware del Simon Says:
-Este proyecto implementa un enfoque orientado a eventos y polling no bloqueante, tal que en varios módulos hay implementadas funciones interfaz que permiten comunicación entre diferentes máquinas de estados, a continuación en la imagen 3.6 un ejemplo en el que se puede ver cómo ayuda esta metodología a respetar un aspecto básico como lo es la modularización en este proyecto:
+Este proyecto implementa un enfoque orientado a eventos y polling no bloqueante, tal que en varios módulos hay implementadas funciones interfaz que permiten comunicación entre diferentes máquinas de estados, a continuación en la figura 3.6 un ejemplo en el que se puede ver cómo ayuda esta metodología a respetar un aspecto básico como lo es la modularización en este proyecto:
 
   <div align="center">
   <img width="857" height="170" alt="image" src="https://github.com/user-attachments/assets/e48f5359-6c7d-4efc-a687-6680d2200db9" />
-  <p><em>Imagen 3.6: Fragmento de código de task_gameplay.c.</em></p>
+  <p><em>Figura 3.6: Fragmento de código de task_gameplay.c.</em></p>
 </div>
 
 ### 3.4.1 Task actuator
@@ -359,7 +359,7 @@ Módulo de bajo nivel que implementa el protocolo de comunicación I2C. Provee p
 
 ### 3.4.8 Task display
 
-Actúa como MEF intermedia entre display.c (librería de bajo nivel de abstracción) y task menu (manejo de display de alto nivel). Gestiona un buffer de pantalla para optimizar la escritura, verificando que se imprima 1 caracter por cada milisegundo.
+Actúa como MEF intermedia entre display.c (librería de bajo nivel de abstracción) y task menu (manejo de display de alto nivel). Gestiona un buffer de pantalla para optimizar la escritura, verificando que se imprima un caracter por cada milisegundo.
 
 ### 3.4.9 Task menu
 
@@ -565,7 +565,7 @@ Este parámetro es crítico para garantizar que el sistema cumpla con los requis
       </tr>
     </tbody>
   </table>
-  <p><em>Tabla 4.2: Evolución del WCET y carga del CPU según el estado del juego.</em></p>
+  <p><em>Tabla 4.2: Evolución del WCET y carga del CPU según el estado del juego, expresado en ųs.</em></p>
 </div>
 
 <p><strong>Observaciones:</strong><br>
@@ -597,49 +597,49 @@ El factor de uso máximo calculado es del **83,2%**. Dado que $U < 100\%$, se co
 
 ## 4.4 Cumplimiento de requisitos  
 
-Una vez finalizado el trabajo, se realizó la tabla 4.3 con los requisitos iniciales, agregando el estado de los mismos.
+Una vez finalizado el trabajo, se realizó la tabla 4.3 con los requisitos iniciales, agregando el estado de los mismos, siendo verde equivalente a haber sido completo y rojo a haber quedadado incompleto.
 
 | Grupo | ID | Descripción | Estado |
 | :---- | :---- | :---- | :---- |
-| Juego | 1.1 | El sistema generará una secuencia de LEDs pseudoaleatoria de longitud creciente. | Completo 🟢 |
-|  | 1.2 | El sistema permitirá al jugador repetir la secuencia mediante cuatro pulsadores asociados a los cuatro LEDs. | Completo 🟢 |
-|  | 1.3 | El sistema comparará la secuencia ingresada por el jugador con la secuencia objetivo y determinará si es correcta. | Completo 🟢 |
-|  | 1.4 | En caso de acierto, el sistema incrementará la longitud de la secuencia y avanzará al siguiente nivel. | Completo 🟢 |
-|  | 1.5 | En caso de error, el sistema finalizará la ronda y mostrará el resultado al jugador. | Completo 🟢 |
-|  | 1.6 | En modo Normal, al iniciar cada nivel se reproducirá la secuencia completa acumulada. | Completo 🟢 |
-|  | 1.7 | En modo Difícil, al iniciar cada nivel solo se reproducirá el **nuevo color agregado** a la secuencia. | Completo 🟢 |
-| Interfaz luminosa | 2.1 | Cada LED estará asociado a un color fijo y a un pulsador específico. | Completo 🟢 |
-|  | 2.2 | Durante la reproducción de la secuencia, el LED correspondiente se encenderá de forma claramente distinguible. | Completo 🟢 |
-|  | 2.3 | Al presionar un pulsador, el LED asociado se encenderá mientras dure la pulsación. | Completo 🟢 |
-|  | 2.4 | El sistema implementará antirrebote por software para los cuatro pulsadores. | Completo 🟢 |
-|  | 2.5 | El sistema deberá registrar pulsaciones rápidas sin perder eventos. | Completo 🟢 |
-|  | 2.6 | El brillo de los LEDs se ajustará automáticamente según el valor leído en el sensor LDR. | Completo 🟢 |
-| Sensor LDR | 3.1 | El sistema contará con un sensor de luz LDR conectado a una entrada analógica del STM32. | Completo 🟢 |
-|  | 3.2 | El sistema leerá al iniciar el valor de la LDR mediante el ADC. | Completo 🟢 |
-|  | 3.3 | El sistema ajustará el ciclo de trabajo PWM de los LEDs en función de la luminosidad ambiente. | Completo 🟢 |
-| Pantalla LCD | 4.1 | El sistema contará con una pantalla LCD para mostrar información de estado. | Completo 🟢 |
-|  | 4.2 | Al encender el sistema, el LCD mostrará una pantalla de bienvenida. | Completo 🟢 |
-|  | 4.3 | Luego de la bienvenida, el LCD mostrará una pantalla de selección de dificultad (Normal / Difícil). | Completo 🟢 |
-|  | 4.4 | Durante el juego, el LCD mostrará el puntaje actual del jugador. | Completo 🟢 |
-|  | 4.5 | Al apagar o finalizar el juego, el LCD mostrará una pantalla de despedida. | Completo 🟢 |
-| Menú con botones | 5.1 | Todos los menús se manejarán exclusivamente con los cuatro botones del juego. | Completo 🟢 |
-|  | 5.2 | Al menos un botón permitirá avanzar entre opciones y otro confirmará la selección. | Completo 🟢 |
-|  | 5.3 | El sistema indicará en pantalla las opciones seleccionadas y confirmadas. | Completo 🟢 |
-| Audio | 6.1 | El sistema contará con un buzzer para producir señales sonoras. | Cancelado 🔴 |
-|  | 6.2 | Cada color del juego tendrá asignado un tono característico reproducido por el buzzer. | Cancelado 🔴 |
-|  | 6.3 | El sistema reproducirá una melodía corta al superar un nivel. | Cancelado 🔴 |
-|  | 6.4 | El sistema reproducirá una secuencia de error cuando el jugador falle la secuencia. | Cancelado 🔴 |
-|  | 6.5 | El sistema podrá emitir sonidos breves al navegar por el menú. | Cancelado 🔴 |
-| Modos de juego y dificultad | 7.1 | El sistema contará al menos con dos niveles de dificultad: Normal y Difícil. | Completo 🟢 |
-|  | 7.2 | La dificultad podrá afectar la velocidad de reproducción de la secuencia y/o el tiempo de respuesta permitido. | Completo 🟢 |
-|  | 7.3 | En Normal se reproducirá la secuencia completa en cada nivel; en Difícil, solo el nuevo color agregado. | Completo 🟢 |
-| Persistencia y estadísticas (EEPROM) | 8.1 | El sistema almacenará el puntaje máximo alcanzado en memoria EEPROM externa. | Completo 🟢 |
-|  | 8.2 | El sistema permitirá leer y mostrar el puntaje máximo guardado al inicio o desde un menú de estadísticas. | Completo 🟢 |
-|  | 8.3 | El sistema permitirá reiniciar el récord (borrar el puntaje máximo guardado) desde el menú. | Cancelado 🔴 |
-|  | 8.4 | La EEPROM podrá usarse para almacenar configuraciones de dificultad u otros parámetros del juego. | Completo 🟢 |
-| Seguridad y robustez | 9.1 | El sistema deberá iniciar siempre en un estado seguro, con LEDs y buzzer apagados hasta que el usuario interactúe. | Completo 🟢 |
-|  | 9.2 | El sistema organizará su lógica en una máquina de estados para evitar bloqueos y comportamientos impredecibles. | Completo 🟢 |
-|  | 9.3 | El sistema deberá indicar mediante mensajes en la pantalla y señales sonoras si ocurre un error interno o condición inesperada. | Cancelado 🔴 |
+| Juego | 1.1 | El sistema generará una secuencia de LEDs pseudoaleatoria de longitud creciente. | 🟢 |
+|  | 1.2 | El sistema permitirá al jugador repetir la secuencia mediante cuatro pulsadores asociados a los cuatro LEDs. |🟢|
+|  | 1.3 | El sistema comparará la secuencia ingresada por el jugador con la secuencia objetivo y determinará si es correcta. |🟢|
+|  | 1.4 | En caso de acierto, el sistema incrementará la longitud de la secuencia y avanzará al siguiente nivel. |🟢|
+|  | 1.5 | En caso de error, el sistema finalizará la ronda y mostrará el resultado al jugador. |🟢|
+|  | 1.6 | En modo Normal, al iniciar cada nivel se reproducirá la secuencia completa acumulada. |🟢|
+|  | 1.7 | En modo Difícil, al iniciar cada nivel solo se reproducirá el **nuevo color agregado** a la secuencia. |🟢|
+| Interfaz luminosa | 2.1 | Cada LED estará asociado a un color fijo y a un pulsador específico. |🟢|
+|  | 2.2 | Durante la reproducción de la secuencia, el LED correspondiente se encenderá de forma claramente distinguible. |🟢|
+|  | 2.3 | Al presionar un pulsador, el LED asociado se encenderá mientras dure la pulsación. |🟢|
+|  | 2.4 | El sistema implementará antirrebote por software para los cuatro pulsadores. |🟢|
+|  | 2.5 | El sistema deberá registrar pulsaciones rápidas sin perder eventos. |🟢|
+|  | 2.6 | El brillo de los LEDs se ajustará automáticamente según el valor leído en el sensor LDR. |🟢|
+| Sensor LDR | 3.1 | El sistema contará con un sensor de luz LDR conectado a una entrada analógica del STM32. |🟢|
+|  | 3.2 | El sistema leerá al iniciar el valor de la LDR mediante el ADC. |🟢|
+|  | 3.3 | El sistema ajustará el ciclo de trabajo PWM de los LEDs en función de la luminosidad ambiente. |🟢|
+| Pantalla LCD | 4.1 | El sistema contará con una pantalla LCD para mostrar información de estado. |🟢|
+|  | 4.2 | Al encender el sistema, el LCD mostrará una pantalla de bienvenida. |🟢|
+|  | 4.3 | Luego de la bienvenida, el LCD mostrará una pantalla de selección de dificultad (Normal / Difícil). |🟢|
+|  | 4.4 | Durante el juego, el LCD mostrará el puntaje actual del jugador. |🟢|
+|  | 4.5 | Al apagar o finalizar el juego, el LCD mostrará una pantalla de despedida. |🟢|
+| Menú con botones | 5.1 | Todos los menús se manejarán exclusivamente con los cuatro botones del juego. |🟢|
+|  | 5.2 | Al menos un botón permitirá avanzar entre opciones y otro confirmará la selección. |🟢|
+|  | 5.3 | El sistema indicará en pantalla las opciones seleccionadas y confirmadas. |🟢|
+| Audio | 6.1 | El sistema contará con un buzzer para producir señales sonoras. |🔴|
+|  | 6.2 | Cada color del juego tendrá asignado un tono característico reproducido por el buzzer. |🔴|
+|  | 6.3 | El sistema reproducirá una melodía corta al superar un nivel. |🔴|
+|  | 6.4 | El sistema reproducirá una secuencia de error cuando el jugador falle la secuencia. |🔴|
+|  | 6.5 | El sistema podrá emitir sonidos breves al navegar por el menú. |🔴|
+| Modos de juego y dificultad | 7.1 | El sistema contará al menos con dos niveles de dificultad: Normal y Difícil. |🟢|
+|  | 7.2 | La dificultad podrá afectar la velocidad de reproducción de la secuencia y/o el tiempo de respuesta permitido. |🟢|
+|  | 7.3 | En Normal se reproducirá la secuencia completa en cada nivel; en Difícil, solo el nuevo color agregado. |🟢|
+| Persistencia y estadísticas (EEPROM) | 8.1 | El sistema almacenará el puntaje máximo alcanzado en memoria EEPROM externa. |🟢|
+|  | 8.2 | El sistema permitirá leer y mostrar el puntaje máximo guardado al inicio o desde un menú de estadísticas. |🟢|
+|  | 8.3 | El sistema permitirá reiniciar el récord (borrar el puntaje máximo guardado) desde el menú. |🔴|
+|  | 8.4 | La EEPROM podrá usarse para almacenar configuraciones de dificultad u otros parámetros del juego. |🟢|
+| Seguridad y robustez | 9.1 | El sistema deberá iniciar siempre en un estado seguro, con LEDs y buzzer apagados hasta que el usuario interactúe. |🟢|
+|  | 9.2 | El sistema organizará su lógica en una máquina de estados para evitar bloqueos y comportamientos impredecibles. |🟢|
+|  | 9.3 | El sistema deberá indicar mediante mensajes en la pantalla y señales sonoras si ocurre un error interno o condición inesperada. |🔴|
 
 <p align="center"><em>Tabla 4.3: Cumplimiento de requisitos</em></p>
 
@@ -647,14 +647,14 @@ Se observa que la gran mayoría de los requisitos se cumplieron para este proyec
 
 
 ## 4.5 Reporte de uso
-Se muestra el "Console" en la imagen 4.1 como también el "Build Analyzer" en la figura 4.2:
+Se muestra el "Console" en la figura 4.1 como también el "Build Analyzer" en la figura 4.2:
   <div align="center">
   <img width="550" height="156" alt="Captura de pantalla 2026-02-17 091647" src="https://github.com/user-attachments/assets/4dcc685b-f506-4dbb-94a7-4577b9bfcd3b" />
-  <p><em>Imagen 4.1: Resumen del proceso de compilación (Build Output).</em></p>
+  <p><em>Figura 4.1: Resumen del proceso de compilación (Build Output).</em></p>
 </div>
   <div align="center">
   <img width="696" height="62" alt="Captura de pantalla 2026-02-17 093125" src="https://github.com/user-attachments/assets/fc268403-327b-462b-ab67-52ebe046923a" />
-  <p><em>Imagen 4.2: Reporte de ocupación de memoria (Size Report).</em></p>
+  <p><em>Figura 4.2: Reporte de ocupación de memoria (Size Report).</em></p>
 </div>
 
 Se observa que el firmware actual ocupa el 26,81% de la capacidad de almacenamiento y el 14,84% de la memoria dinámica disponible. Esto indica que el sistema posee un amplio margen de recursos excedentes , permitiendo futuras expansiones o la adición de funcionalidades complejas sin riesgo de desbordamiento de memoria (Stack Overflow) o falta de espacio en el disco.
