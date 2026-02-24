@@ -1,0 +1,125 @@
+/*
+ * Copyright (c) 2023 Juan Manuel Cruz <jcruz@fi.uba.ar> <jcruz@frba.utn.edu.ar>.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @file   : task_menu_attribute.h
+ * @date   : Set 26, 2023
+ * @author : Juan Manuel Cruz <jcruz@fi.uba.ar> <jcruz@frba.utn.edu.ar>
+ * @version	v1.0.0
+ */
+
+#ifndef TASK_INC_TASK_MENU_ATTRIBUTE_H_
+#define TASK_INC_TASK_MENU_ATTRIBUTE_H_
+
+/********************** CPP guard ********************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/********************** inclusions *******************************************/
+
+/********************** macros ***********************************************/
+
+/********************** typedef **********************************************/
+/* Menu Statechart - State Transition Table */
+/* 	------------------------+-----------------------+-----------------------+-----------------------+------------------------
+ * 	| Current               | Event                 |                       | Next                  |                       |
+ * 	| State                 | (Parameters)          | [Guard]               | State                 | Actions               |
+ * 	|=======================+=======================+=======================+=======================+=======================|
+ * 	| INICIAL               |                       |                       | ST_MEN_XX_IDLE        |                       |
+ * 	|-----------------------+-----------------------+-----------------------+-----------------------+-----------------------|
+ * 	| ST_MEN_XX_IDLE        | EV_MEN_MEN_ACTIVE     |                       | ST_MEN_XX_ACTIVE      |                       |
+ * 	|                       |                       |                       |                       |                       |
+ * 	|-----------------------+-----------------------+-----------------------+-----------------------+-----------------------|
+ * 	| ST_MEN_XX_ACTIVE      | EV_MEN_MEN_IDLE       |                       | ST_MEN_XX_IDLE        |                       |
+ * 	|                       |                       |                       |                       |                       |
+ * 	------------------------+-----------------------+-----------------------+-----------------------+------------------------
+ */
+
+/* Events to excite Task Menu */
+// task_menu_attribute.h
+typedef enum {
+    ST_MEN_XX_IDLE,
+    ST_MEN_MAIN,
+    ST_MEN_MENU1,
+    ST_MEN_MENU2,
+    ST_MEN_MENU3,
+    ST_MEN_MENU4,
+	ST_MEN_GAME_OVER,
+    ST_MEN_GAME
+} task_menu_state_t;
+
+typedef enum task_menu_ev {
+
+	   EV_MEN_IZQ,
+	   EV_MEN_ENTER,
+	   EV_MEN_DER,
+	   EV_MEN_ESC,
+
+	   EV_MEN_UPDATE_SCORE,
+	   EV_MEN_GAME_OVER,
+
+	   EV_MEN_SCORES_UPDATED,
+
+	   EV_MEN_IDLE,
+
+   } task_menu_ev_t;
+
+
+typedef struct
+{
+    uint32_t tick;
+    task_menu_state_t state;
+    task_menu_ev_t event;
+    bool flag;
+
+    uint8_t index_menu0;     //
+    uint8_t index_menu1;     // Para manejo sobre menu
+    uint8_t index_menu2;     //
+
+    uint32_t input_score;    // Recibido por calculo de gameplay
+
+    uint32_t high_scores[3]; // [0]=Top 1, [1]=Top 2, [2]=Top 3
+
+} task_menu_dta_t;
+
+/********************** external data declaration ****************************/
+extern task_menu_dta_t task_menu_dta;
+
+/********************** external functions declaration ***********************/
+
+/********************** End of CPP guard *************************************/
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* TASK_INC_TASK_MENU_ATTRIBUTE_H_ */
+
+/********************** end of file ******************************************/
